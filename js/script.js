@@ -11,17 +11,21 @@ formulario.addEventListener("submit", (e) => {
         "email": e.target.elements["email"].value,
         "rg": e.target.elements["rg"].value,
         "cpf": e.target.elements["cpf"].value,
-        "aniversario": e.target.elements["aniversario"].value,
+        "aniversario": e.target.elements[
+            "aniversario"].value,
     }
 
-    localStorage.setItem("cadastro", JSON.stringify(listaRespostas));
+    localStorage.setItem("cadastro", JSON.stringify(
+        listaRespostas));
 
     window.location.href = "./abrir-conta-form-2.html";
 })
 
 camposDoFormulario.forEach((campo) => {
-    campo.addEventListener("blur", () => verificaCampo(campo));
-    campo.addEventListener("invalid", evento => evento.preventDefault())
+    campo.addEventListener("blur", () => verificaCampo(
+        campo));
+    campo.addEventListener("invalid", evento => 
+        evento.preventDefault())
 })
 
 const tiposDeErro = [
@@ -69,7 +73,8 @@ function verificaCampo(campo) {
     if (campo.name == "cpf" && campo.value.length >= 11) {
         ehUmCPF(campo);
     }
-    if (campo.name == "aniversario" && campo.value != "") {
+    if (campo.name == "aniversario" && 
+                campo.value != "") {
         ehMaiorDeIdade(campo);
     }
     tiposDeErro.forEach(erro => {
@@ -78,7 +83,8 @@ function verificaCampo(campo) {
             console.log(mensagem);
         }
     })
-    const mensagemErro = campo.parentNode.querySelector('.mensagem-erro');
+    const mensagemErro = campo.parentNode.querySelector(
+        '.mensagem-erro');
     const validadorDeInput = campo.checkValidity();
 
     if (!validadorDeInput) {

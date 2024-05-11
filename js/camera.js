@@ -8,32 +8,27 @@ const botaoEnviarFoto = document.querySelector("[data-enviar]")
 
 let imagemURL = '';
 
+//INICIANDO A CAMERA    
 botaoIniciarCamera.addEventListener('click', async function () {
-    const iniciarVideo = await navigator.mediaDevices
-        .getUserMedia({ video: true, audio: false });
-
+    const iniciarVideo = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
     botaoIniciarCamera.style.display = "none";
     campoCamera.style.display = "block";
-
     video.srcObject = iniciarVideo;
 });
 
+//TIRANDO A FOTO
 botaoTirarFoto.addEventListener('click', function () {
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-
     imagemURL = canvas.toDataURL('image/jpeg');
-
     campoCamera.style.display = "none";
     mensagem.style.display = "block";
 });
 
+//ENVIANDO A FOTO
 botaoEnviarFoto.addEventListener('click', () => {
     const receberDadosExistentes = localStorage.getItem("cadastro");
     const converteRetorno = JSON.parse(receberDadosExistentes);
-
     converteRetorno.imagem = imagemURL;
-
     localStorage.setItem('cadastro', JSON.stringify(converteRetorno))
-
     window.location.href = '../pages/abrir-conta-form-3.html';
 })
